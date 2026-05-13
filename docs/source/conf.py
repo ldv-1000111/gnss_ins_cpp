@@ -42,7 +42,7 @@ html_theme_options = {
 }
 
 html_context = {
-    "display_github": False,
+    "display_github": True,
 }
 
 todo_include_todos = True
