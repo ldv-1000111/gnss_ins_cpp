@@ -23,6 +23,8 @@ MATLAB to a clean, commented, production-ready C++17 library using **Eigen3**.
    :maxdepth: 2
    :caption: Getting Started
 
+   Source Code (GitHub) <https://github.com/ldv-1000111/gnss_ins_cpp>
+
    getting_started/overview
    getting_started/architecture
    getting_started/motion_profiles
