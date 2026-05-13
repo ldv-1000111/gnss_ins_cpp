@@ -43,6 +43,10 @@ html_theme_options = {
 
 html_context = {
     "display_github": True,
+    'github_user': 'ldv-1000111',
+    'github_repo': 'gnss_ins_cpp',
+    'github_version': 'main',
+    'doc_path': 'docs/source',"display_github": True,
 }
 
 todo_include_todos = True
