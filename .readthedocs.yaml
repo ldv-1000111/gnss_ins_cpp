@@ -1,9 +1,17 @@
 version: 2
-python:
-  version: "3.11"
+
+sphinx:
+  configuration: docs/source/conf.py
+version: 2
+
 build:
-  os: ubuntu-22.04
+  os: ubuntu-22.04  # The "Virtual Computer"
   tools:
-    python: "3.11"
+    python: "3.11"  # The specific tool version running ON that computer
+
+python:
+  install:
+    - requirements: docs/requirements.txt
+    
 sphinx:
   configuration: docs/source/conf.py
