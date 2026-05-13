@@ -20,7 +20,7 @@ C++17 port of Paul D. Groves' navigation simulation suite from *Principles of GN
 ```bash
 git clone git@github.com:ldv-1000111/gnss_ins_cpp.git
 cd gnss_ins_cpp
-docker compose build
+docker compose --profile build build build-gcc
 docker compose --profile dev run --rm shell-gcc
 ```
 
@@ -35,6 +35,7 @@ ctest --test-dir /build/gcc -V
 ### Run with Clang 19
 
 ```bash
+docker compose --profile build build build-clang
 docker compose --profile dev run --rm shell-clang
 cmake -S /workspace -B /build/clang -G Ninja
 cmake --build /build/clang --parallel 16
