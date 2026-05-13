@@ -1,0 +1,11 @@
+FROM python:3.12-slim-bookworm
+
+RUN pip install --no-cache-dir \
+    sphinx==7.3.7 sphinx-rtd-theme==2.0.0 myst-parser==3.0.1 \
+    sphinx-autobuild==2024.2.4
+
+RUN apt-get update && apt-get install -y --no-install-recommends curl \
+ && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /docs
+EXPOSE 8080

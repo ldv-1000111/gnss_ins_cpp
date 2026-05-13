@@ -1,0 +1,138 @@
+name: gnss_ins
+
+volumes:
+  build-gcc-vol:
+  build-clang-vol:
+  ccache-gcc-vol:
+  ccache-clang-vol:
+
+services:
+
+  build-gcc:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.gcc
+    image: gnss_ins_gcc:latest
+    container_name: gnss_build_gcc
+    runtime: runc
+    working_dir: /workspace
+    environment:
+      CMAKE_BUILD_TYPE: RelWithDebInfo
+      CTEST_OUTPUT_ON_FAILURE: "1"
+      CTEST_PARALLEL_LEVEL: "8"
+      CC: gcc
+      CXX: g++
+      CCACHE_DIR: /ccache
+    volumes:
+      - ./include:/workspace/include:ro
+      - ./tests:/workspace/tests:ro
+      - ./CMakeLists.txt:/workspace/CMakeLists.txt:ro
+      - ./data:/workspace/data:ro
+      - build-gcc-vol:/build/gcc
+      - ccache-gcc-vol:/ccache
+    command: bash -c "cmake -S /workspace -B /build/gcc -DCMAKE_BUILD_TYPE=RelWithDebInfo -G Ninja && cmake --build /build/gcc --parallel 16"
+    profiles: [build, ci]
+
+  build-clang:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.clang
+    image: gnss_ins_clang:latest
+    container_name: gnss_build_clang
+    runtime: runc
+    working_dir: /workspace
+    environment:
+      CMAKE_BUILD_TYPE: RelWithDebInfo
+      CTEST_OUTPUT_ON_FAILURE: "1"
+      CTEST_PARALLEL_LEVEL: "8"
+      CC: clang
+      CXX: clang++
+      CCACHE_DIR: /ccache
+    volumes:
+      - ./include:/workspace/include:ro
+      - ./tests:/workspace/tests:ro
+      - ./CMakeLists.txt:/workspace/CMakeLists.txt:ro
+      - ./data:/workspace/data:ro
+      - build-clang-vol:/build/clang
+      - ccache-clang-vol:/ccache
+    command: bash -c "cmake -S /workspace -B /build/clang -DCMAKE_BUILD_TYPE=RelWithDebInfo -G Ninja && cmake --build /build/clang --parallel 16"
+    profiles: [build, ci]
+
+  test-gcc:
+    image: gnss_ins_gcc:latest
+    container_name: gnss_test_gcc
+    runtime: runc
+    volumes:
+      - ./data:/workspace/data:ro
+      - build-gcc-vol:/build/gcc
+    command: ctest --test-dir /build/gcc --output-on-failure --parallel 8
+    depends_on:
+      build-gcc:
+        condition: service_completed_successfully
+    profiles: [test, ci]
+
+  test-clang:
+    image: gnss_ins_clang:latest
+    container_name: gnss_test_clang
+    runtime: runc
+    volumes:
+      - ./data:/workspace/data:ro
+      - build-clang-vol:/build/clang
+    command: ctest --test-dir /build/clang --output-on-failure --parallel 8
+    depends_on:
+      build-clang:
+        condition: service_completed_successfully
+    profiles: [test, ci]
+
+  shell-gcc:
+    image: gnss_ins_gcc:latest
+    container_name: gnss_shell_gcc
+    runtime: runc
+    stdin_open: true
+    tty: true
+    working_dir: /workspace
+    environment:
+      CC: gcc
+      CXX: g++
+      CCACHE_DIR: /ccache
+      PS1: "(gcc-14) $ "
+    volumes:
+      - .:/workspace
+      - build-gcc-vol:/build/gcc
+      - ccache-gcc-vol:/ccache
+    command: bash
+    profiles: [dev]
+
+  shell-clang:
+    image: gnss_ins_clang:latest
+    container_name: gnss_shell_clang
+    runtime: runc
+    stdin_open: true
+    tty: true
+    working_dir: /workspace
+    environment:
+      CC: clang
+      CXX: clang++
+      CCACHE_DIR: /ccache
+      PS1: "(clang-19) $ "
+    volumes:
+      - .:/workspace
+      - build-clang-vol:/build/clang
+      - ccache-clang-vol:/ccache
+    command: bash
+    profiles: [dev]
+
+  docs:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.docs
+    image: gnss_ins_docs:latest
+    container_name: gnss_docs
+    runtime: runc
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./docs:/docs
+    command: bash -c "sphinx-build -b html /docs/source /docs/build/html -q && python3 -m http.server 8080 --directory /docs/build/html"
+    profiles: [docs]
+
