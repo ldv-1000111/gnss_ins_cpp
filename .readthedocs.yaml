@@ -9,5 +9,9 @@ build:
   tools:
     python: "3.11"  # The specific tool version running ON that computer
 
+python:
+  install:
+    - requirements: docs/requirements.txt
+    
 sphinx:
   configuration: docs/source/conf.py
