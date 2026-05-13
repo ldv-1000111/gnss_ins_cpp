@@ -8,3 +8,6 @@ build:
   os: ubuntu-22.04  # The "Virtual Computer"
   tools:
     python: "3.11"  # The specific tool version running ON that computer
+
+sphinx:
+  configuration: docs/source/conf.py
