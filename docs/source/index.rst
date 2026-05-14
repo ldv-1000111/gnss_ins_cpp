@@ -1,4 +1,4 @@
-GNSS / INS Integrated Navigation — C++ Migration
+Groves GNSS / INS Integrated Navigation — C++ Migration
 =================================================
 
 .. image:: https://img.shields.io/badge/version-2.0--cpp-blue
@@ -13,7 +13,7 @@ GNSS / INS Integrated Navigation — C++ Migration
 ----
 
 Developer reference and step-by-step coding tutorial for porting the
-`Groves (2013) <https://us.artechhouse.com/Principles-of-GNSS-Inertial-and-Multisensor-Integrated-Navigation-Systems-Second-Edition-P2046.aspxnavigation>`_ simulation suite from
+`Groves (2013) <https://us.artechhouse.com/Principles-of-GNSS-Inertial-and-Multisensor-Integrated-Navigation-Systems-Second-Edition-P2046.aspx>`_ simulation suite from
 MATLAB to a clean, commented, production-ready C++17 library using **Eigen3**.
 
    *"Principles of GNSS, Inertial, and Multisensor Integrated Navigation Systems"*
