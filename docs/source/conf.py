@@ -42,8 +42,7 @@ html_theme_options = {
 }
 
 html_context = {
-    "display_github": True,
-    'github_url': 'https://github.com/ldv-1000111/gnss_ins_cpp',
+    "display_github": False,
 }
 
 todo_include_todos = True
