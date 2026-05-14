@@ -59,7 +59,8 @@ ctest --test-dir /build/clang -V
 docker compose --profile ci up --abort-on-container-exit
 ```
 
-## Project structure
+```text
+Project structure
 
 include/gnss_ins/
 ├── common.hpp
