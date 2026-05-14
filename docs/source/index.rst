@@ -10,6 +10,10 @@ Groves GNSS / INS Integrated Navigation — C++ Migration
 .. image:: https://img.shields.io/badge/standard-C%2B%2B17-orange
    :alt: C++17
 
+| **Author:** Luis Viveros
+| **Version:** 1.0
+| **Date:** May 2026
+
 ----
 
 Developer reference and step-by-step coding tutorial for porting the

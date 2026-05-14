@@ -1,4 +1,4 @@
-# GNSS / INS Navigation — C++ Migration
+# Groves GNSS / INS Navigation — C++ Migration
 
 [![version](https://img.shields.io/badge/version-0.1.0--step1-blue)](https://github.com/ldv-1000111/gnss_ins_cpp)
 [![license](https://img.shields.io/badge/license-BSD-green)](./LICENSE)
@@ -10,12 +10,12 @@ C++17 port of Paul D. Groves' navigation simulation suite from *Principles of GN
 
 This repository is a **C++17 migration** of the navigation simulation suite originally developed in MATLAB by **Paul D. Groves**.
 
-* [cite_start]**Lead Developer/Maintainer:** ldv-1000111 (2024–2026) [cite: 148, 149, 158]
-* [cite_start]**Original Algorithms & Data:** Based on *Principles of GNSS, Inertial, and Multisensor Integrated Navigation Systems* (2nd Ed., 2013)[cite: 100, 119, 120].
-* [cite_start]**Technical Stewardship:** All C++ implementation, GoogleTest suites, and Docker-based CI/CD scaffolding are original works developed by ldv-1000111[cite: 38, 142, 156].
+* **Lead Developer/Maintainer:** ldv-1000111 (2026)
+* **Original Algorithms & Data:** Based on *Principles of GNSS, Inertial, and Multisensor Integrated Navigation Systems* (2nd Ed., 2013)
+* **Technical Stewardship:** All C++ implementation, GoogleTest suites, and Docker-based CI/CD scaffolding are original works developed by ldv-1000111
 
 ### Legal Status
-[cite_start]The math and logic belong to the original author, while this specific C++ "expression" and implementation are the creation of the current maintainer. [cite_start]This project is a technical transformation and does not imply official endorsement by Paul Groves[cite: 110, 136].
+The math and logic belong to the original author, while this specific C++ "expression" and implementation are the creation of the current maintainer. This project is a technical transformation and does not imply official endorsement by Paul Groves
 
 **Status:** Step 1 Complete — Project scaffolding (CMake, constants, CSV I/O).
 
